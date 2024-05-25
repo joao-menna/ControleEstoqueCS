@@ -1,3 +1,5 @@
+using Bogus;
+using Bogus.Extensions.Brazil;
 using Dominio;
 using ExpectedObjects;
 using Teste.Builders;
@@ -6,23 +8,25 @@ namespace Teste
 {
     public class ClienteTeste
     {
-        int _codigo;
-        string _nome;
-        string _endereco;
-        string _telefone;
-        string _cpf;
-        string _email;
-        string _rg;
+        private readonly int _codigo;
+        private readonly string _nome;
+        private readonly string _endereco;
+        private readonly string _telefone;
+        private readonly string _cpf;
+        private readonly string _email;
+        private readonly string _rg;
 
         public ClienteTeste()
         {
-            this._codigo = 1;
-            this._nome = "Funerária Agrícola";
-            this._endereco = "Rua das Cacaia, 12";
-            this._telefone = "(47) 3025-8076";
-            this._cpf = "222.222.222-22";
-            this._email = "zecolmeia@parque.org";
-            this._rg = "123";
+            Faker faker = new();
+
+            _codigo = faker.Random.Int(1);
+            _nome = faker.Person.FullName;
+            _endereco = faker.Address.FullAddress();
+            _telefone = faker.Person.Phone;
+            _cpf = faker.Person.Cpf();
+            _email = faker.Person.Email;
+            _rg = faker.Random.Int(100_000, 999_999).ToString();
         }
 
 
@@ -115,8 +119,6 @@ namespace Teste
 
 
         [Theory]
-        [InlineData(null)]
-        [InlineData("")]
         [InlineData("ze")]
         [InlineData("ze@")]
         [InlineData("@bol.com.br")]

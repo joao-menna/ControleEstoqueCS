@@ -22,18 +22,13 @@
 
         public Cliente(int codigo, string nome, string endereco, string telefone, string cpf, string email, string rg)
         {
-            // if (nome == null) throw new ArgumentException();
-            // if (nome == "") throw new ArgumentException();
-
-            // if (nome == null || nome == "") throw new ArgumentException();
-
             if (codigo < 1) throw new ArgumentException("Código inválido");
             if (string.IsNullOrEmpty(nome)) throw new ArgumentException("Nome inválido");
             if (string.IsNullOrEmpty(endereco)) throw new ArgumentException("Endereço inválido");
             if (string.IsNullOrEmpty(telefone)) throw new ArgumentException("Telefone inválido");
             if (string.IsNullOrEmpty(rg)) throw new ArgumentException("Telefone inválido");
             if (string.IsNullOrEmpty(cpf) || !CPFvalido(cpf)) throw new ArgumentException("CPF inválido");
-            if (string.IsNullOrEmpty(email) || !EmailValido(email)) throw new ArgumentException("Email inválido");
+            if (!string.IsNullOrEmpty(email) && !EmailValido(email)) throw new ArgumentException("Email inválido");
 
             this.Codigo = codigo;
             this.Nome = nome;
@@ -60,7 +55,7 @@
         }
 
 
-            public bool CPFvalido(string cpf)
+        public bool CPFvalido(string cpf)
         {
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };

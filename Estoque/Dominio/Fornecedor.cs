@@ -19,6 +19,12 @@ namespace Dominio
 
         public Fornecedor(int codigo, string nome, string endereco, string email, string telefone, string termoPagamento, List<FornecedorTransacao> historicoTransacoes)
         {
+            if (codigo < 1) throw new ArgumentException("Código inválido");
+            if (string.IsNullOrEmpty(nome)) throw new ArgumentException("Nome inválido");
+            if (string.IsNullOrEmpty(endereco)) throw new ArgumentException("Endereço inválido");
+            if (!string.IsNullOrEmpty(email) && !EmailValido(email)) throw new ArgumentException("Email inválido");
+            if (string.IsNullOrEmpty(telefone)) throw new ArgumentException("Telefone inválido");
+
             Codigo = codigo;
             Nome = nome;
             Endereco = endereco;
@@ -35,5 +41,18 @@ namespace Dominio
         public string TermoPagamento { get => _termoPagamento; set => _termoPagamento = value; }
         public List<FornecedorTransacao> HistoricoTransacoes { get => _historicoTransacoes; set => _historicoTransacoes = value; }
         public string Endereco { get => _endereco; set => _endereco = value; }
+
+        public bool EmailValido(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

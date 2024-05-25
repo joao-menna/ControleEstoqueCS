@@ -11,14 +11,15 @@ namespace Teste.Builders
     public class MovimentoBuilder
     {
         private int _codigo;
+        private string _codigoUnico;
         private FornecedorTransacaoType _tipo;
         private int _quantidade;
-        private float _valorCompra;
-        private string _dataEntrada;
+        private float _valor;
+        private string _data;
         private string? _fornecedor;
         private string? _cliente;
         private int _numeroFatura;
-        private string _motivoEntrada;
+        private string _motivo;
 
         private MovimentoBuilder()
         {
@@ -26,9 +27,10 @@ namespace Teste.Builders
             Random random = new();
 
             _codigo = faker.Random.Int(1, 10000);
+            _codigoUnico = faker.Random.Int(1).ToString();
             _quantidade = faker.Random.Int(1, 10000);
-            _valorCompra = faker.Random.Float() % 100f;
-            _dataEntrada = faker.Date.Recent(5).ToShortDateString();
+            _valor = faker.Random.Float() % 100f;
+            _data = faker.Date.Recent(5).ToShortDateString();
 
             // Gerar cliente ou fornecedor aleatorio
             var hasFornecedor = random.NextDouble() >= 0.5d;
@@ -36,7 +38,7 @@ namespace Teste.Builders
             _cliente = !hasFornecedor ? faker.Person.FullName : null;
 
             _numeroFatura = faker.Random.Int(1, 10000);
-            _motivoEntrada = faker.Random.Words(3);
+            _motivo = faker.Random.Words(3);
 
             Array values = Enum.GetValues(typeof(FornecedorTransacaoType));
             FornecedorTransacaoType randomTransacaoType =
@@ -54,20 +56,27 @@ namespace Teste.Builders
         {
             return new Movimento(
                 _codigo,
+                _codigoUnico,
                 _tipo,
                 _quantidade,
-                _valorCompra,
-                _dataEntrada,
+                _valor,
+                _data,
                 _fornecedor,
                 _cliente,
                 _numeroFatura,
-                _motivoEntrada
+                _motivo
             );
         }
 
         public MovimentoBuilder ComCodigo(int atributo)
         {
             _codigo = atributo;
+            return this;
+        }
+
+        public MovimentoBuilder ComCodigoUnico(string atributo)
+        {
+            _codigoUnico = atributo;
             return this;
         }
 
@@ -83,15 +92,15 @@ namespace Teste.Builders
             return this;
         }
         
-        public MovimentoBuilder ComValorCompra(float atributo)
+        public MovimentoBuilder ComValor(float atributo)
         {
-            _valorCompra = atributo;
+            _valor = atributo;
             return this;
         }
         
-        public MovimentoBuilder ComDataEntrada(string atributo)
+        public MovimentoBuilder ComData(string atributo)
         {
-            _dataEntrada = atributo;
+            _data = atributo;
             return this;
         }
         
@@ -113,9 +122,9 @@ namespace Teste.Builders
             return this;
         }
 
-        public MovimentoBuilder ComMotivoEntrada(string atributo)
+        public MovimentoBuilder ComMotivo(string atributo)
         {
-            _motivoEntrada = atributo;
+            _motivo = atributo;
             return this;
         }
     }

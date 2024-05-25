@@ -9,36 +9,59 @@ namespace Dominio
     public class Movimento
     {
         private int codigo;
+        private string codigoUnico;
         private FornecedorTransacaoType tipo;
         private int quantidade;
-        private float valorCompra;
-        private string dataEntrada;
+        private float valor;
+        private string data;
         private string? fornecedor;
         private string? cliente;
         private int numeroFatura;
-        private string motivoEntrada;
+        private string motivo;
 
-        public Movimento(int codigo, FornecedorTransacaoType tipo, int quantidade, float valorCompra, string dataEntrada, string? fornecedor, string? cliente, int numeroFatura, string motivoEntrada)
+        public Movimento(
+            int codigo,
+            string codigoUnico,
+            FornecedorTransacaoType tipo,
+            int quantidade,
+            float valor,
+            string data,
+            string? fornecedor,
+            string? cliente,
+            int numeroFatura,
+            string motivo)
         {
+            if (codigo < 1) throw new ArgumentException("Código inválido");
+            if (quantidade < 0) throw new ArgumentException("Quantidade inválida");
+            if (valor < 0) throw new ArgumentException("Valor inválido");
+            if (string.IsNullOrEmpty(data)) throw new ArgumentException("Data inválida");
+            if (string.IsNullOrEmpty(fornecedor) && string.IsNullOrEmpty(cliente)) {
+                throw new ArgumentException("A movimentação deve possuir um fornecedor ou cliente");
+            }
+            if (numeroFatura < 1) throw new ArgumentException("Número da fatura inválido");
+            if (string.IsNullOrEmpty(motivo)) throw new ArgumentException("Motivo inválido");
+
             this.codigo = codigo;
+            this.codigoUnico = codigoUnico;
             this.tipo = tipo;
             this.quantidade = quantidade;
-            this.valorCompra = valorCompra;
-            this.dataEntrada = dataEntrada;
+            this.valor = valor;
+            this.data = data;
             this.fornecedor = fornecedor;
             this.cliente = cliente;
             this.numeroFatura = numeroFatura;
-            this.motivoEntrada = motivoEntrada;
+            this.motivo = motivo;
         }
 
         public int Codigo { get => codigo; set => codigo = value; }
+        public string CodigoUnico { get => codigoUnico; set => codigoUnico = value; }
         public FornecedorTransacaoType Tipo { get => tipo; set => tipo = value; }
         public int Quantidade { get => quantidade; set => quantidade = value; }
-        public float ValorCompra { get => valorCompra; set => valorCompra = value; }
-        public string DataEntrada { get => dataEntrada; set => dataEntrada = value; }
+        public float Valor { get => valor; set => valor = value; }
+        public string Data { get => data; set => data = value; }
         public string? Fornecedor { get => fornecedor; set => fornecedor = value; }
         public string? Cliente { get => cliente; set => cliente = value; }
         public int NumeroFatura { get => numeroFatura; set => numeroFatura = value; }
-        public string MotivoEntrada { get => motivoEntrada; set => motivoEntrada = value; }
+        public string Motivo { get => motivo; set => motivo = value; }
     }
 }

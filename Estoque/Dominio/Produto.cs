@@ -17,12 +17,19 @@ namespace Dominio
         private string categoria;
         private string fornecedor;
 
+        // Preferi manter o quantidadeEstoque e o precoCompra apesar de nao serem usados
+        // pois sera mais facil de mudar caso necessario
         public Produto(int codigo, string descricao, string codigoBarras, float precoCompra, float precoVenda, int quantidadeEstoque, string categoria, string fornecedor)
         {
+            if (codigo < 1) throw new ArgumentException("Código inválido");
+            if (string.IsNullOrEmpty(descricao)) throw new ArgumentException("Descrição inválida");
+            if (string.IsNullOrEmpty(codigoBarras)) throw new ArgumentException("Código de barras inválido");
+            if (precoVenda < 0) throw new ArgumentException("Preço de venda inválido");
+
             this.codigo = codigo;
             this.descricao = descricao;
             this.codigoBarras = codigoBarras;
-            this.precoCompra = 0;
+            this.precoCompra = 0f;
             this.precoVenda = precoVenda;
             this.quantidadeEstoque = 0;
             this.categoria = categoria;

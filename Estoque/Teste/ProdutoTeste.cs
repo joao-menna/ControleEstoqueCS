@@ -12,12 +12,12 @@ namespace Teste
 {
     public class ProdutoTeste
     {
-        private int _codigo;
-        private string _descricao;
-        private string _codigoBarras;
-        private float _precoVenda;
-        private string _categoria;
-        private string _fornecedor;
+        private readonly int _codigo;
+        private readonly string _descricao;
+        private readonly string _codigoBarras;
+        private readonly float _precoVenda;
+        private readonly string _categoria;
+        private readonly string _fornecedor;
 
         public ProdutoTeste()
         {
@@ -38,7 +38,7 @@ namespace Teste
                 _codigo,
                 _descricao,
                 _codigoBarras,
-                0,
+                0f,
                 _precoVenda,
                 0,
                 _categoria,
@@ -50,7 +50,7 @@ namespace Teste
                 Codigo = _codigo,
                 Descricao = _descricao,
                 CodigoBarras = _codigoBarras,
-                PrecoCompra = 0,
+                PrecoCompra = 0f,
                 PrecoVenda = _precoVenda,
                 QuantidadeEstoque = 0,
                 Categoria = _categoria,
@@ -67,7 +67,7 @@ namespace Teste
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                ProdutoBuilder.Novo().ComCodigo(codigo);
+                ProdutoBuilder.Novo().ComCodigo(codigo).Criar();
             });
         }
 
@@ -78,7 +78,7 @@ namespace Teste
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                ProdutoBuilder.Novo().ComDescricao(descricao);
+                ProdutoBuilder.Novo().ComDescricao(descricao).Criar();
             });
         }
 
@@ -89,16 +89,7 @@ namespace Teste
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                ProdutoBuilder.Novo().ComCodigoBarras(codigoBarras);
-            });
-        }
-
-        [Fact]
-        public void Should_CriarProdutoComQuantidadeEstoque()
-        {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                ProdutoBuilder.Novo().ComQuantidadeEstoque(-1);
+                ProdutoBuilder.Novo().ComCodigoBarras(codigoBarras).Criar();
             });
         }
     }

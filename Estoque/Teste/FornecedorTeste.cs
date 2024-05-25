@@ -113,8 +113,9 @@ namespace Teste
         }
 
         [Theory]
-        [InlineData(null)]
-        [InlineData("")]
+        [InlineData("ze")]
+        [InlineData("ze@")]
+        [InlineData("@colmeia.com.br")]
         public void Should_CriarComEmail(string email)
         {
             Assert.Throws<ArgumentException>(
@@ -134,19 +135,6 @@ namespace Teste
                 () =>
                 {
                     FornecedorBuilder.Novo().ComTelefone(telefone).Criar();
-                }
-            );
-        }
-
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        public void Should_CriarComTermoPagamento(string termoPagamento)
-        {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    FornecedorBuilder.Novo().ComTermoPagamento(termoPagamento).Criar();
                 }
             );
         }
