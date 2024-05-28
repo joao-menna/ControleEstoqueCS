@@ -34,7 +34,7 @@ namespace Teste
 
             _historicoTransacoes = new();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 1; i <= 5; i++)
             {
                 Random random = new();
                 Array values = Enum.GetValues(typeof(FornecedorTransacaoType));
@@ -42,7 +42,7 @@ namespace Teste
                     (FornecedorTransacaoType)values.GetValue(random.Next(values.Length))!;
 
                 _historicoTransacoes.Add(
-                    new FornecedorTransacao(i, _codigo, 100.50 * i, randomTransacaoType)
+                    new FornecedorTransacao(i, _codigo, 100.50f * i, randomTransacaoType)
                 );
             }
         }

@@ -25,13 +25,13 @@ namespace Dominio
             if (!string.IsNullOrEmpty(email) && !EmailValido(email)) throw new ArgumentException("Email inválido");
             if (string.IsNullOrEmpty(telefone)) throw new ArgumentException("Telefone inválido");
 
-            Codigo = codigo;
-            Nome = nome;
-            Endereco = endereco;
-            Email = email;
-            Telefone = telefone;
-            TermoPagamento = termoPagamento;
-            HistoricoTransacoes = historicoTransacoes;
+            _codigo = codigo;
+            _nome = nome;
+            _endereco = endereco;
+            _email = email;
+            _telefone = telefone;
+            _termoPagamento = termoPagamento;
+            _historicoTransacoes = historicoTransacoes;
         }
 
         public int Codigo { get => _codigo; set => _codigo = value; }

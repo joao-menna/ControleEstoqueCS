@@ -30,13 +30,13 @@
             if (string.IsNullOrEmpty(cpf) || !CPFvalido(cpf)) throw new ArgumentException("CPF inválido");
             if (!string.IsNullOrEmpty(email) && !EmailValido(email)) throw new ArgumentException("Email inválido");
 
-            this.Codigo = codigo;
-            this.Nome = nome;
-            this.Endereco = endereco;
-            this.Telefone = telefone;
-            this.Cpf = cpf;
-            this.Email = email;
-            this.Rg = rg;
+            this.codigo = codigo;
+            this.nome = nome;
+            this.endereco = endereco;
+            this.telefone = telefone;
+            this.cpf = cpf;
+            this.email = email;
+            this.rg = rg;
         }
 
 
