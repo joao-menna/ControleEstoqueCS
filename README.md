@@ -1,4 +1,8 @@
 ﻿# ControleEstoqueCS
+Aluno: João Miguel de Castro Menna
+
+Professor: Paulo Rogério Pires Manseira
+
 Controle de estoque, fase 3, n2 de testes de software
 
 ## Introdução
@@ -48,3 +52,5 @@ Array values = Enum.GetValues(typeof(FornecedorTransacaoType));
 FornecedorTransacaoType randomTransacaoType =
     (FornecedorTransacaoType)values.GetValue(random.Next(values.Length))!;
 ```
+
+- Namespaces: Usei namespaces diferentes para referenciar a coisas diferentes
