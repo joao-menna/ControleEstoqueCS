@@ -92,5 +92,35 @@ namespace Teste
                 ProdutoBuilder.Novo().ComCodigoBarras(codigoBarras).Criar();
             });
         }
+
+        [Fact]
+        public void Should_BuscarProduto_PorDescricao()
+        {
+            ProdutoBuilder.Novo().ComCodigo(_codigo).ComDescricao(_descricao).Criar();
+
+            var produtoBuscado = Produto.Buscar(_descricao, null, null);
+
+            Assert.Equal(_codigo, produtoBuscado!.codigo);
+        }
+
+        [Fact]
+        public void Should_BuscarProduto_PorCodigoBarras()
+        {
+            ProdutoBuilder.Novo().ComCodigo(_codigo).ComCodigoBarras(_codigoBarras).Criar();
+
+            var produtoBuscado = Produto.Buscar(null, _codigoBarras, null);
+
+            Assert.Equal(_codigo, produtoBuscado!.codigo);
+        }
+
+        [Fact]
+        public void Should_BuscarProduto_PorCategoria()
+        {
+            ProdutoBuilder.Novo().ComCodigo(_codigo).ComCategoria(_categoria).Criar();
+
+            var produtoBuscado = Produto.Buscar(null, null, _categoria);
+
+            Assert.Equal(_codigo, produtoBuscado!.codigo);
+        }
     }
 }

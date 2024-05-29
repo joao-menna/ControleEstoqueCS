@@ -61,7 +61,7 @@ namespace Dominio
         public string Fornecedor { get => fornecedor; set => fornecedor = value; }
 
 
-        public static ProdutoDTO? Buscar(string descricao, string codigoBarras, string categoria)
+        public static ProdutoDTO? Buscar(string? descricao, string? codigoBarras, string? categoria)
         {
             foreach (var produto in bd)
             {
