@@ -65,17 +65,17 @@ namespace Dominio
         {
             foreach (var produto in bd)
             {
-                if (string.IsNullOrEmpty(descricao))
+                if (!string.IsNullOrEmpty(descricao))
                 {
                     if (produto.descricao!.Contains(descricao)) return produto;
                 }
 
-                if (string.IsNullOrEmpty(codigoBarras))
+                if (!string.IsNullOrEmpty(codigoBarras))
                 {
                     if (produto.codigoBarras!.Contains(codigoBarras)) return produto;
                 }
 
-                if (string.IsNullOrEmpty(categoria))
+                if (!string.IsNullOrEmpty(categoria))
                 {
                     if (produto.categoria!.Contains(categoria)) return produto;
                 }

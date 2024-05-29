@@ -73,17 +73,17 @@ namespace Dominio
         {
             foreach (var fornecedor in bd)
             {
-                if (string.IsNullOrEmpty(nome))
+                if (!string.IsNullOrEmpty(nome))
                 {
                     if (fornecedor.nome!.Contains(nome)) return fornecedor;
                 }
 
-                if (string.IsNullOrEmpty(email))
+                if (!string.IsNullOrEmpty(email))
                 {
                     if (fornecedor.email!.Contains(email)) return fornecedor;
                 }
 
-                if (string.IsNullOrEmpty(telefone))
+                if (!string.IsNullOrEmpty(telefone))
                 {
                     if (fornecedor.telefone!.Contains(telefone)) return fornecedor;
                 }

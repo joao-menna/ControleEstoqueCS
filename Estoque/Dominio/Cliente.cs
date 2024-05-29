@@ -123,17 +123,17 @@ namespace Dominio
         {
             foreach(var cliente in bd)
             {
-                if (string.IsNullOrEmpty(nome))
+                if (!string.IsNullOrEmpty(nome))
                 {
                     if (cliente.nome!.Contains(nome)) return cliente;
                 }
 
-                if (string.IsNullOrEmpty(email))
+                if (!string.IsNullOrEmpty(email))
                 {
                     if (cliente.email!.Contains(email)) return cliente;
                 }
 
-                if (string.IsNullOrEmpty(telefone))
+                if (!string.IsNullOrEmpty(telefone))
                 {
                     if (cliente.telefone!.Contains(telefone)) return cliente;
                 }

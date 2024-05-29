@@ -85,7 +85,6 @@ namespace Teste
                 () =>
                 ClienteBuilder.Novo().ComEndereco(end).Criar()
             );
-
         }
 
 
@@ -99,7 +98,6 @@ namespace Teste
                 () =>
                 ClienteBuilder.Novo().ComTelefone(tel).Criar()
             );
-
         }
 
 
@@ -114,7 +112,6 @@ namespace Teste
                 () =>
                 ClienteBuilder.Novo().ComCPF(cpf).Criar()
             );
-            
         }
 
 
@@ -128,7 +125,6 @@ namespace Teste
                 () =>
                 ClienteBuilder.Novo().ComEmail(email).Criar()
             );
-
         }
 
         [Theory]
@@ -140,7 +136,24 @@ namespace Teste
                 () =>
                 ClienteBuilder.Novo().ComRg(rg).Criar()
             );
+        }
 
+        [Theory]
+        [InlineData("Claudio", null, null)]
+        [InlineData(null, "claudio@email.com", null)]
+        [InlineData(null, null, "(69) 91234-4567")]
+        public void Should_BuscarCliente(string nome, string email, string telefone)
+        {
+            var cliente = ClienteBuilder
+                .Novo()
+                .ComNome("Claudio")
+                .ComEmail("claudio@email.com")
+                .ComTelefone("(69) 91234-4567")
+                .Criar();
+
+            var clienteBuscado = Cliente.Buscar(nome, email, telefone);
+
+            Assert.Equal(cliente.Codigo, clienteBuscado!.codigo);
         }
     }
 }
