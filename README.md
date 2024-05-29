@@ -7,7 +7,7 @@ Controle de estoque, fase 3, n2 de testes de software
 
 ## Introdução
 
-Esse sistema de controle de estoque básico possui 57 testes.
+Esse sistema de controle de estoque básico possui 66 testes.
 
 Foram usados alguns conceitos não ensinados na aula, então desculpa se
 algo não condiz. Pode estar implementado diferentemente, mas tudo funciona.
