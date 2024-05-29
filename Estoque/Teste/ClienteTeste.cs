@@ -44,7 +44,7 @@ namespace Teste
                 Rg = _rg
             };
 
-            Cliente cli = new Cliente(_codigo, _nome, _endereco, _telefone, _cpf, _email, _rg);
+            Cliente cli = new(_codigo, _nome, _endereco, _telefone, _cpf, _email, _rg);
 
             clienteEsperado.ToExpectedObject().ShouldMatch(cli);
         }
@@ -138,22 +138,34 @@ namespace Teste
             );
         }
 
-        [Theory]
-        [InlineData("Claudio", null, null)]
-        [InlineData(null, "claudio@email.com", null)]
-        [InlineData(null, null, "(69) 91234-4567")]
-        public void Should_BuscarCliente(string nome, string email, string telefone)
+        [Fact]
+        public void Should_BuscarCliente_PorNome()
         {
-            var cliente = ClienteBuilder
-                .Novo()
-                .ComNome("Claudio")
-                .ComEmail("claudio@email.com")
-                .ComTelefone("(69) 91234-4567")
-                .Criar();
+            ClienteBuilder.Novo().ComCodigo(_codigo).ComNome(_nome).Criar();
 
-            var clienteBuscado = Cliente.Buscar(nome, email, telefone);
+            var clienteBuscado = Cliente.Buscar(_nome, null, null);
 
-            Assert.Equal(cliente.Codigo, clienteBuscado!.codigo);
+            Assert.Equal(_codigo, clienteBuscado!.codigo);
+        }
+
+        [Fact]
+        public void Should_BuscarCliente_PorEmail()
+        {
+            ClienteBuilder.Novo().ComCodigo(_codigo).ComEmail(_email).Criar();
+
+            var clienteBuscado = Cliente.Buscar(null, _email, null);
+
+            Assert.Equal(_codigo, clienteBuscado!.codigo);
+        }
+
+        [Fact]
+        public void Should_BuscarCliente_PorTelefone()
+        {
+            ClienteBuilder.Novo().ComCodigo(_codigo).ComTelefone(_telefone).Criar();
+
+            var clienteBuscado = Cliente.Buscar(null, null, _telefone);
+
+            Assert.Equal(_codigo, clienteBuscado!.codigo);
         }
     }
 }

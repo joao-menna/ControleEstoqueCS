@@ -119,7 +119,7 @@ namespace Dominio
         }
         
 
-        public static ClienteDTO? Buscar(string nome, string email, string telefone)
+        public static ClienteDTO? Buscar(string? nome, string? email, string? telefone)
         {
             foreach(var cliente in bd)
             {

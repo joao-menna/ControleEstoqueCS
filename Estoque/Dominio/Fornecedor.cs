@@ -69,7 +69,7 @@ namespace Dominio
             }
         }
 
-        public static FornecedorDTO? Buscar(string nome, string email, string telefone)
+        public static FornecedorDTO? Buscar(string? nome, string? email, string? telefone)
         {
             foreach (var fornecedor in bd)
             {

@@ -138,5 +138,35 @@ namespace Teste
                 }
             );
         }
+
+        [Fact]
+        public void Should_BuscarFornecedor_PorNome()
+        {
+            FornecedorBuilder.Novo().ComCodigo(_codigo).ComNome(_nome).Criar();
+
+            var fornecedorBuscado = Fornecedor.Buscar(_nome, null, null);
+
+            Assert.Equal(_codigo, fornecedorBuscado!.codigo);
+        }
+
+        [Fact]
+        public void Should_BuscarFornecedor_PorEmail()
+        {
+            FornecedorBuilder.Novo().ComCodigo(_codigo).ComEmail(_email).Criar();
+
+            var fornecedorBuscado = Fornecedor.Buscar(null, _email, null);
+
+            Assert.Equal(_codigo, fornecedorBuscado!.codigo);
+        }
+
+        [Fact]
+        public void Should_BuscarFornecedor_PorTelefone()
+        {
+            FornecedorBuilder.Novo().ComCodigo(_codigo).ComTelefone(_telefone).Criar();
+
+            var fornecedorBuscado = Fornecedor.Buscar(null, null, _telefone);
+
+            Assert.Equal(_codigo, fornecedorBuscado!.codigo);
+        }
     }
 }
