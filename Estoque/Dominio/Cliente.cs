@@ -1,7 +1,11 @@
-﻿namespace Dominio
+﻿using Dominio.DTO;
+
+namespace Dominio
 {
     public class Cliente
     {
+        private static List<ClienteDTO> bd = new();
+
         // campos
         private int codigo;
         private string nome;
@@ -37,8 +41,18 @@
             this.cpf = cpf;
             this.email = email;
             this.rg = rg;
-        }
 
+            bd.Add(new ClienteDTO
+            {
+                codigo = codigo,
+                nome = nome,
+                endereco = endereco,
+                telefone = telefone,
+                cpf = cpf,
+                email = email,
+                rg = rg
+            });
+        }
 
 
         public bool EmailValido(string email)
@@ -103,8 +117,29 @@
 
             return cpf.EndsWith(digito);
         }
+        
 
+        public static ClienteDTO? Buscar(string nome, string email, string telefone)
+        {
+            foreach(var cliente in bd)
+            {
+                if (string.IsNullOrEmpty(nome))
+                {
+                    if (cliente.nome!.Contains(nome)) return cliente;
+                }
 
+                if (string.IsNullOrEmpty(email))
+                {
+                    if (cliente.email!.Contains(email)) return cliente;
+                }
 
+                if (string.IsNullOrEmpty(telefone))
+                {
+                    if (cliente.telefone!.Contains(telefone)) return cliente;
+                }
+            }
+
+            return null;
+        }
     }
 }

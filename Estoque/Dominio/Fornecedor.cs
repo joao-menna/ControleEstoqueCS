@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace Dominio
 {
     public class Fornecedor
     {
+        private static List<FornecedorDTO> bd = new();
+
         private int _codigo;
         private string _nome;
         private string _endereco;
@@ -32,6 +35,17 @@ namespace Dominio
             _telefone = telefone;
             _termoPagamento = termoPagamento;
             _historicoTransacoes = historicoTransacoes;
+
+            bd.Add(new FornecedorDTO
+            {
+                codigo = codigo,
+                nome = nome,
+                endereco = endereco,
+                email = email,
+                telefone = telefone,
+                termoPagamento = termoPagamento,
+                historicoTransacoes = historicoTransacoes,
+            });
         }
 
         public int Codigo { get => _codigo; set => _codigo = value; }
@@ -53,6 +67,29 @@ namespace Dominio
             {
                 return false;
             }
+        }
+
+        public static FornecedorDTO? Buscar(string nome, string email, string telefone)
+        {
+            foreach (var fornecedor in bd)
+            {
+                if (string.IsNullOrEmpty(nome))
+                {
+                    if (fornecedor.nome!.Contains(nome)) return fornecedor;
+                }
+
+                if (string.IsNullOrEmpty(email))
+                {
+                    if (fornecedor.email!.Contains(email)) return fornecedor;
+                }
+
+                if (string.IsNullOrEmpty(telefone))
+                {
+                    if (fornecedor.telefone!.Contains(telefone)) return fornecedor;
+                }
+            }
+
+            return null;
         }
     }
 }

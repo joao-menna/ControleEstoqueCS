@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace Dominio
 {
     public class Produto
     {
+        private static List<ProdutoDTO> bd = new();
+
         private int codigo;
         private string descricao;
         private string codigoBarras;
@@ -34,6 +37,18 @@ namespace Dominio
             this.quantidadeEstoque = 0;
             this.categoria = categoria;
             this.fornecedor = fornecedor;
+
+            bd.Add(new ProdutoDTO
+            {
+                codigo = codigo,
+                descricao = descricao,
+                codigoBarras = codigoBarras,
+                precoCompra = 0f,
+                precoVenda = precoVenda,
+                quantidadeEstoque = 0,
+                categoria = categoria,
+                fornecedor = fornecedor,
+            });
         }
 
         public int Codigo { get => codigo; set => codigo = value; }
@@ -44,5 +59,29 @@ namespace Dominio
         public int QuantidadeEstoque { get => quantidadeEstoque; set => quantidadeEstoque = value; }
         public string Categoria { get => categoria; set => categoria = value; }
         public string Fornecedor { get => fornecedor; set => fornecedor = value; }
+
+
+        public static ProdutoDTO? Buscar(string descricao, string codigoBarras, string categoria)
+        {
+            foreach (var produto in bd)
+            {
+                if (string.IsNullOrEmpty(descricao))
+                {
+                    if (produto.descricao!.Contains(descricao)) return produto;
+                }
+
+                if (string.IsNullOrEmpty(codigoBarras))
+                {
+                    if (produto.codigoBarras!.Contains(codigoBarras)) return produto;
+                }
+
+                if (string.IsNullOrEmpty(categoria))
+                {
+                    if (produto.categoria!.Contains(categoria)) return produto;
+                }
+            }
+
+            return null;
+        }
     }
 }
